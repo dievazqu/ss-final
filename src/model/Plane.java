@@ -11,24 +11,26 @@ public class Plane {
 	// Fuente:
 	// https://es.gizmodo.com/quien-decide-el-espacio-entre-asientos-de-los-aviones-y-1797187123
 
+	private final int seatRows = 24;
 	private final double corridor = 0.6;
 	private final double initSpace = 1.8;
 	private final double seatLength = 0.8;
 	private final double seatWidth = 0.45;
-	private final double length = seatLength * 23 + initSpace; // 21.2
+	private final double length = seatLength * (seatRows-1) + initSpace; // 21.2
 	private final double width = seatWidth * 6 + corridor; // 3.5
 	private List<Segment> seatsRow;
 	private List<Segment> corridorLines;
 	private final double delta = 0.1;
+	
 
 	public Plane() {
 		seatsRow = new LinkedList<Segment>();
 		corridorLines = new LinkedList<Segment>();
-		for (int i = 0; i < 25; i++) {
+		for (int i = 0; i < seatRows+1; i++) {
 			seatsRow.add(new Segment(new Point(initSpace + i * seatLength - seatLength, 0), new Point(
 					initSpace + i * seatLength- seatLength, seatWidth * 3)));
 		}
-		for (int i = 0; i < 25; i++) {
+		for (int i = 0; i < seatRows+1 ; i++) {
 			seatsRow.add(new Segment(
 					new Point(initSpace + i * seatLength- seatLength, seatWidth * 3 + corridor), new Point(
 							initSpace + i * seatLength- seatLength, width)));

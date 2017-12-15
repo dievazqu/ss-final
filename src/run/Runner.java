@@ -1,10 +1,5 @@
 package run;
 
-import factory.BackwardsFactory;
-import factory.BackwardsImproveFactory;
-import factory.Block3Factory;
-import factory.PassengerFactory;
-import factory.RandomFactory;
 import model.Plane;
 import model.PlaneSimulation;
 import model.Point;
@@ -12,6 +7,8 @@ import model.particle.Human;
 import model.particle.Particle;
 import utils.OutputXYZFilesGenerator;
 import utils.RandomUtils;
+import factory.BlockFactory;
+import factory.PassengerFactory;
 
 public class Runner {
 
@@ -32,10 +29,10 @@ public class Runner {
 				ve);
 		OutputXYZFilesGenerator outputXYZFilesGenerator = new OutputXYZFilesGenerator(
 				"animation/", "state");
-		int seed = 1236;
+		int seed = 1238;
 		RandomUtils.setSeed(seed);
 		System.out.println(seed);
-		PassengerFactory passengerFactory = new RandomFactory(24*6);
+		PassengerFactory passengerFactory = new BlockFactory(24*6, 3);
 		double timeOfLastPassenger = 0;
 		Particle humanSpace = new Particle(0, rMax, plane.getWidth()/2, 0, 0, rMax);
 		while (passengerFactory.hasPassengers() || !planeSimulation.areAllSeated() ) {
@@ -50,6 +47,7 @@ public class Runner {
 				int id = passengerFactory.getNextPassengerId();
 				planeSimulation.addHuman(new Human(id, new Point(rMax, plane.getWidth()/2), rMin, rMax, vdMax, beta, tau,
 						ve, plane, meanTimeToWait, stdTimeToWait));
+				System.out.println(planeSimulation.getTime());
 			}
 		}
 		System.out.println("All passenger are seated");

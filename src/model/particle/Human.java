@@ -63,7 +63,7 @@ public class Human extends Particle {
 		Point deltaPosition = velocity.clone();
 		deltaPosition.applyFunction(v->v*time);
 		position.add(deltaPosition);
-		if(desireLocations.size()>0 && Point.dist(position, desireLocations.get(0)) < 0.1){
+		if(desireLocations.size()>0 && Point.dist(position, desireLocations.get(0)) < 0.15){
 			desireLocations.remove(0);
 			if(desireLocations.size() == 1){ // Deja las valijas 
 				waitingTime = Math.max(0, RandomUtils.getRandomGaussian(meanTimeToWait, stdTimeToWait));

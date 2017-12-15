@@ -4,24 +4,28 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Block3Factory implements PassengerFactory{
+public class BlockImproveFactory implements PassengerFactory{
 	
 	private List<Integer>[] blocks;
 	private List<Integer> ids;
 	
-	public Block3Factory(int passengerSize){
+	public BlockImproveFactory(int passengerSize, int blocksNum){
 		ids = new LinkedList<Integer>();
-		blocks = new List[3];
-		for(int i=0; i<3; i++){
+		blocks = new List[blocksNum];
+		for(int i=0; i<blocksNum; i++){
 			blocks[i] = new LinkedList<Integer>();
 		}
-		int division = passengerSize/3;
+		int division = passengerSize/blocksNum;
 		for(int i=0; i<passengerSize; i++){
 			blocks[i/division].add(i);
 		}
-		for(int i=2; i>=0; i--){
+		for(int i=blocksNum-1; i>=0; i--){
 			Collections.shuffle(blocks[i]);
-			ids.addAll(blocks[i]);
+		}
+		for(int i=0; i<division; i++){
+			for(int j=blocksNum-1; j>=0; j--){
+				ids.add(blocks[j].get(i));
+			}
 		}
 	}
 	

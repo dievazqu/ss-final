@@ -34,6 +34,7 @@ public class PlaneSimulation {
 		this.cim = new CellIndexMethod<Particle>(particles, plane.getLength(), 2*rMax, 0, false);
 		this.dt = rMin / (2*Math.max(vdMax, ve));
 		this.radiusStep = rMax / (tau / dt);
+		System.out.println(dt);
 	} 
 	
 	public List<Human> getParticles() {
