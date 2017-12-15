@@ -66,5 +66,27 @@ public class PlaneSimulation {
 			p.move(dt);
 		}
 	}
+
+	public boolean areAllSeated() {
+		for(Human h : humans){
+			if(!h.isSeated()){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public double getAvgPassengersTime() {
+		return humans.stream().mapToDouble(h -> h.getTimeToSeat()).average().orElse(0);
+	}
+
+	public boolean planeHasSpaceForNewPasenger(Particle humanSpace) {
+		for(Human h : humans){
+			if(Particle.areOverlapped(h, humanSpace)){
+				return false;
+			}
+		}
+		return true;
+	}
 	
 }

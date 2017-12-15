@@ -12,6 +12,10 @@ public class RandomUtils {
 		random.setSeed(seed);
 	}
 	
+	public static double getRandomGaussian(double mean, double std){
+		return random.nextGaussian()*std + mean;
+	}
+	
 	public static double getRandomDouble(double min, double max){
 		if(!seedSet){
 			System.err.println("Warning! Random seed not set");
